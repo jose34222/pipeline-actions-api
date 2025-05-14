@@ -39,7 +39,7 @@ jobs:
         # run: npm run lint
 
       - name: Corremos las prueb unitarias y de intregración con su covertura
-        run: npm run text:cov
+        run: npm run test:cov
 
       - name: Corremos las pruebas end-to-end
         run: npm run test:e2e
