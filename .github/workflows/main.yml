@@ -35,4 +35,22 @@ jobs:
           npm install 
           npm run build --if-present
           
+      # - name: Correnos el linter
+        # run: npm run lint
+
+      - name: Corremos las prueb unitarias y de intregración con su covertura
+        run: npm run text:cov
+
+      - name: Corremos las pruebas end-to-end
+        run: npm run test:e2e
+
+      - name: Actualizamos el artefacto con el reporte de covertura de los tests
+        uses: action/upload-artifact@v4
+        with: 
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+          if-no-files-found: error
+          
+          
         
