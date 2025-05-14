@@ -52,5 +52,29 @@ jobs:
           retention-days: 7
           if-no-files-found: error
           
-          
-        
+    crear-artefacto:
+      needs: correr-tests
+      runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v4
+
+        - name: Usamos Node.js 20.x
+          uses: actions/setup-node@v4
+          with:
+            node-version: '20.x'
+            cache: 'npm'
+
+        - name: Instalamos las dependencias
+          run: npm ci
+
+        - name: Realizamos el build de la aplicación
+          run: npm run build
+
+        - name: Actualizamos el artefacto
+          uses: actions/upload-artifact@v4
+          with:
+            name: artifact
+            path: dist/
+            retention-days: 7
+            if-no-files-found: error
